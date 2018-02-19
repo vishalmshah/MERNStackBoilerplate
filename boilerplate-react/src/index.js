@@ -1,9 +1,11 @@
+/* eslint-disable */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-// import LoginPage from "./components/pages/LoginPage";
+import 'react-flexbox-grid/dist/react-flexbox-grid.css';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -11,8 +13,5 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById('root')
 );
-// ReactDOM.render(
-//   <BrowserRouter><LoginPage /></BrowserRouter>,
-//   document.getElementById('root')
-// );
+
 registerServiceWorker();

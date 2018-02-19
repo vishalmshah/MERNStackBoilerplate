@@ -12,7 +12,7 @@ class LoginPage extends Component {
     return (
       <div>
         <h1>Login Page</h1>
-        <Link href='/'>Home</Link>
+        <Link to='/'>Home</Link>
 
         <LoginForm submit={this.submit} />
       </div>
