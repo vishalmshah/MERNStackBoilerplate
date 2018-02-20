@@ -8,7 +8,10 @@ class LoginForm extends Component {
     super();
 
     this.state = {
-      data: {},
+      data: {
+        email: '',
+        password: ''
+      },
       loading: false,
       errors: {}
     };
@@ -21,11 +24,13 @@ class LoginForm extends Component {
     });
   }
 
-  onSubmit = () => {
+  onSubmit = (e) => {
+    e.preventDefault();
     const errors = this.validate(this.state.data);
     this.setState({ errors });
     if (Object.keys(errors).length === 0)
       this.props.submit(this.state.data);
+    console.log(this.state)
   }
 
   validate = (data) => {
@@ -41,14 +46,30 @@ class LoginForm extends Component {
     return (
       <form onSubmit={this.onSubmit}>
         <div>
-          <input type='email' id='email' name='email' placeholder='example@example.com' value={data.email} onChange={this.onChange} />
+          <label htmlFor='email'>Email</label>
+          <input
+            type='email'
+            id='email'
+            name='email'
+            placeholder='example@example.com'
+            value={data.email}
+            onChange={this.onChange}
+          />
           { errors.email && <InlineError text={errors.email}/> }
         </div>
         <div>
-          <input type='password' id='password' name='password' placeholder='Password' value={data.password} onChange={this.onChange} />
+          <label htmlFor='password'>Password</label>
+          <input
+            type='password'
+            id='password'
+            name='password'
+            placeholder='Password'
+            value={data.password}
+            onChange={this.onChange}
+          />
           { errors.password && <InlineError text={errors.password}/> }
         </div>
-        <button primary>Login</button>
+        <button>Login</button>
       </form>
     );
   }

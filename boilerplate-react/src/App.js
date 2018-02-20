@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { HomePage, LoginPage } from "./components/pages";
