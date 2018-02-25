@@ -29,8 +29,9 @@ class LoginForm extends Component {
     const errors = this.validate(this.state.data);
     this.setState({ errors });
     if (Object.keys(errors).length === 0)
-      this.props.submit(this.state.data);
-    console.log(this.state)
+    this.setState({ loading: true });
+      this.props.submit(this.state.data)
+        .catch(err => this.setState({ errors: err.response.data.errors, loading: false }));
   }
 
   validate = (data) => {
@@ -45,6 +46,11 @@ class LoginForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
+      { errors.global && (
+        <InlineError>
+          Something Went Wrong: {errors.global}
+        </InlineError>
+      )}
         <div>
           <label htmlFor='email'>Email</label>
           <input
@@ -55,7 +61,7 @@ class LoginForm extends Component {
             value={data.email}
             onChange={this.onChange}
           />
-          { errors.email && <InlineError text={errors.email}/> }
+          { errors.email && <InlineError>{errors.email}</InlineError> }
         </div>
         <div>
           <label htmlFor='password'>Password</label>
@@ -67,7 +73,7 @@ class LoginForm extends Component {
             value={data.password}
             onChange={this.onChange}
           />
-          { errors.password && <InlineError text={errors.password}/> }
+          { errors.password && <InlineError>{errors.password}</InlineError> }
         </div>
         <button>Login</button>
       </form>

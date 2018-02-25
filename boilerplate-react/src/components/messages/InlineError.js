@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.sass'
 
-const InlineError = ({ text }) => <span className={styles.error}>{text}</span>
+const InlineError = ({ children }) => <span className={styles.error}>{children}</span>
 
 InlineError.propTypes = {
-  text: PropTypes.string.isRequired
+  children: PropTypes.string.isRequired
 }
 
 export default InlineError;
