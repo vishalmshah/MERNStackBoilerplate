@@ -1,15 +1,24 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { HomePage, LoginPage } from "./components/pages";
+import PropTypes from 'prop-types';
+import { HomePage, LoginPage, DashboardPage } from "./components/pages";
+import { UserRoute, GuestRoute } from './components/routes';
 // import { Grid } from 'react-flexbox-grid';
 
 // TODO: Change div to <Grid fluid></Grid>
 // OPTION: add {location} as a parameter
-const App = () => (
+const App = ({ location }) => (
   <div>
-    <Route path='/' exact component={HomePage} />
-    <Route path='/login' exact component={LoginPage} />
+    <Route location={location}  path='/' exact component={HomePage} />
+    <GuestRoute location={location}  path='/login' exact component={LoginPage} />
+    <UserRoute location={location} path='/dashboard' exact component={DashboardPage} />
   </div>
 )
+
+App.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired
+  }).isRequired
+};
 
 export default App;
