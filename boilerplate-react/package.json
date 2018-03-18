@@ -5,7 +5,9 @@
   "dependencies": {
     "axios": "^0.18.0",
     "custom-react-scripts": "0.2.1",
+    "jwt-decode": "^2.2.0",
     "node-sass": "^4.7.2",
+    "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-flexbox-grid": "^2.0.0",

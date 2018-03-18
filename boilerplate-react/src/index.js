@@ -5,6 +5,7 @@ import 'react-flexbox-grid/dist/react-flexbox-grid.css';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import decode from 'jwt-decode';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
@@ -17,7 +18,12 @@ const store = createStore(
 );
 
 if (localStorage.boilerplateJWT) {
-  const user = { token: localStorage.boilerplateJWT };
+  const payload = decode(localStorage.boilerplateJWT);
+  const user = { 
+    token: localStorage.boilerplateJWT,
+    email: payload.email,
+    confirmed: payload.confirmed
+  };
   store.dispatch(userLoggedIn(user));
 }
 

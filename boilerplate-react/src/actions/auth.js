@@ -6,7 +6,7 @@ export const userLoggedIn = (user) => ({
   user
 });
 
-export const userLoggedOut = (user) => ({
+export const userLoggedOut = () => ({
   type: USER_LOGGED_OUT
 });
 
@@ -20,3 +20,9 @@ export const logout = () => dispatch => {
   localStorage.removeItem('boilerplateJWT');
   dispatch(userLoggedOut());
 };
+
+export const confirm = (token) => (dispatch) =>
+  api.user.confirm(token).then(user => {
+    localStorage.boilerplateJWT = user.token;
+    dispatch(userLoggedIn(user));
+  })

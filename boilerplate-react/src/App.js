@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { HomePage, LoginPage, DashboardPage } from "./components/pages";
+import { HomePage, LoginPage, SignupPage, DashboardPage, ConfirmationPage } from "./components/pages";
 import { UserRoute, GuestRoute } from './components/routes';
 // import { Grid } from 'react-flexbox-grid';
 
@@ -10,7 +10,9 @@ import { UserRoute, GuestRoute } from './components/routes';
 const App = ({ location }) => (
   <div>
     <Route location={location}  path='/' exact component={HomePage} />
+    <Route location={location}  path='/confirmation/:token' exact component={ConfirmationPage} />
     <GuestRoute location={location}  path='/login' exact component={LoginPage} />
+    <GuestRoute location={location}  path='/signup' exact component={SignupPage} />
     <UserRoute location={location} path='/dashboard' exact component={DashboardPage} />
   </div>
 )
