@@ -2,7 +2,7 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 
 import User from '../models/User';
-import { sendResetPasswordEmail } from '../mailer';
+import { sendResetPasswordEmail, sendResetPasswordConfirmationEmail } from '../mailer';
 
 const router = express.Router();
 
@@ -65,6 +65,7 @@ router.post('/reset_password', (req, res) => {
       User.findOne({ _id: decoded._id }).then(user => {
         if (user) {
           user.setPassword(password);
+          sendResetPasswordConfirmationEmail(user);
           user.save().then(() => res.status(201).json({}));
         } else {
           res.status(404).json({ errors: { global: 'Invalid Token' } });

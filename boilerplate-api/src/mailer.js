@@ -47,3 +47,17 @@ export function sendResetPasswordEmail(user) {
 
   transport.sendMail(email);
 }
+
+export function sendResetPasswordConfirmationEmail(user) {
+  const transport = setup();
+  const email = {
+    from,
+    to: user.email,
+    subject: 'Your Password was Reset',
+    text: `
+    Your password was just reset. If this was not you please contact us.
+    `
+  }
+
+  transport.sendMail(email);
+}
