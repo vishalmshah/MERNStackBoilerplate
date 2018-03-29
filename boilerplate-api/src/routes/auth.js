@@ -32,7 +32,9 @@ router.post('/confirmation', (req, res) => {
 router.post('/reset_password_request', (req, res) => {
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
+      user.setResetPasswordToken();
       sendResetPasswordEmail(user);
+      user.save();
       res.status(201).json({});
     } else {
       res.status(400).json({ errors: { global: 'There is no user with this email' } });
@@ -45,7 +47,9 @@ router.post('/validate_token', (req, res) => {
     if (err) {
       res.status(401).json({});
     } else {
-      User.findOne({ _id: decoded._id }).then(user => {
+      // console.log(req.body.token);
+      User.findOne({ _id: decoded._id }).then((user, err) => {
+        // console.log(JSON.stringify(user.resetPasswordToken));
         if (user) {
           res.status(201).json({});
         } else {
@@ -65,6 +69,7 @@ router.post('/reset_password', (req, res) => {
       User.findOne({ _id: decoded._id }).then(user => {
         if (user) {
           user.setPassword(password);
+          user.deleteResetPasswordToken();
           sendResetPasswordConfirmationEmail(user);
           user.save().then(() => res.status(201).json({}));
         } else {

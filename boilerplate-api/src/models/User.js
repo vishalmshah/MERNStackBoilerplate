@@ -16,7 +16,8 @@ const schema = new mongoose.Schema({
   },
   passwordHash: { type: String, required: true },
   confirmed: { type: Boolean, default: false },
-  confirmationToken: { type: String, default: '' }
+  confirmationToken: { type: String, default: '' },
+  resetPasswordToken: { type: String, default: '' }
 }, { timestamp: true });
 
 schema.methods.isValidPassword = function isValidPassword(password) {
@@ -31,12 +32,20 @@ schema.methods.setConfirmationToken = function setConfirmationToken() {
   this.confirmationToken = this.generateJWT();
 }
 
+schema.methods.setResetPasswordToken = function setResetPasswordToken() {
+  this.resetPasswordToken = this.generateResetPasswordToken();
+}
+
+schema.methods.deleteResetPasswordToken = function setResetPasswordToken() {
+  this.resetPasswordToken = '';
+}
+
 schema.methods.generateConfirmationUrl = function generateConfirmationUrl() {
   return `${process.env.HOST}/confirmation/${this.confirmationToken}`;
 }
 
 schema.methods.generateResetPasswordLink = function generateResetPasswordLink() {
-  return `${process.env.HOST}/reset_password/${this.generateResetPasswordToken()}`;
+  return `${process.env.HOST}/reset_password/${this.resetPasswordToken}`;
 }
 
 schema.methods.generateJWT = function generateJWT() {
