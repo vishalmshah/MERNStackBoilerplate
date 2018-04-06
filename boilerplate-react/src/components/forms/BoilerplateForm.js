@@ -16,6 +16,12 @@ class BoilerplateForm extends Component {
       data: { ...this.state.data, [e.target.name]: e.target.value }
     });
 
+  onChangeNumber = e =>
+    this.setState({
+      ...this.state,
+      data: { ...this.state.data, [e.target.name]: parseInt(e.target.value, 10) }
+    });
+
   onSubmit = e => {
     e.preventDefault();
     const errors = this.validate(this.state.data);

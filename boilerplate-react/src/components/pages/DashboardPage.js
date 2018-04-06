@@ -10,7 +10,10 @@ const DashboardPage = ({ isConfirmed }) => (
 );
 
 DashboardPage.propTypes = {
-  isConfirmed: PropTypes.bool.isRequired
+  isConfirmed: PropTypes.bool.isRequired,
+  books: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired
+  }).isRequired).isRequired
 };
 
 function mapStateToProps(state) {

@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "advanced-react-scripts": "^0.3.50-beta.0",
     "axios": "^0.18.0",
     "custom-react-scripts": "0.2.1",
+    "gravatar-url": "^2.0.0",
     "jwt-decode": "^2.2.0",
     "node-sass": "^4.7.2",
     "prop-types": "^15.6.1",
@@ -13,9 +15,9 @@
     "react-flexbox-grid": "^2.0.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "^1.1.1",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1",
     "validator": "^9.4.1"
   },
   "scripts": {
