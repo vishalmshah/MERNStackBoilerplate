@@ -1,10 +1,12 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
+// import authenticate from '../middlewares/authenticate';
 
 import User from '../models/User';
 import { sendResetPasswordEmail, sendResetPasswordConfirmationEmail } from '../mailer';
 
 const router = express.Router();
+// router.use(authenticate);
 
 router.post('/', (req, res) => {
   const { credentials } = req.body;
